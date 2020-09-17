@@ -36,26 +36,27 @@
         android:id="@+id/record_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="32dp"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_filename" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageView"
         android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="84dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/mic_enabled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/record_timer"
-        app:layout_constraintVertical_bias="0.015"
-        app:srcCompat="@drawable/mic_enabled" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/view_record_list"
         android:layout_width="83dp"
         android:layout_height="83dp"
@@ -65,7 +66,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/record_list" />
+        android:background="@drawable/record_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
