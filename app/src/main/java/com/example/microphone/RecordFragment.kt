@@ -1,6 +1,7 @@
 package com.example.microphone
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +11,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import java.security.Permission
+import java.util.jar.Manifest
 
 class RecordFragment : Fragment(), View.OnClickListener {
 
@@ -22,6 +26,10 @@ class RecordFragment : Fragment(), View.OnClickListener {
     lateinit var text: TextView
 
     private var isRecording: Boolean = false
+
+    //Record Permission
+    private var recordPermission = android.Manifest.permission.RECORD_AUDIO
+    private val PERMISSION_CODE = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +59,16 @@ class RecordFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.record_audio -> {
-                isRecording = if (isRecording) {
-                    recordBtn.setImageDrawable(resources.getDrawable(R.drawable.mic_enabled))
-                    false
-                } else {
-                    recordBtn.setImageDrawable(resources.getDrawable(R.drawable.mic_disabled))
-                    true
+                if (checkPermissions()) {
+                    isRecording = if (isRecording) {
+                        //Stop Recording
+                        recordBtn.setImageDrawable(resources.getDrawable(R.drawable.mic_enabled))
+                        false
+                    } else {
+                        //Start Recording
+                        recordBtn.setImageDrawable(resources.getDrawable(R.drawable.mic_disabled))
+                        true
+                    }
                 }
             }
 
@@ -65,5 +77,15 @@ class RecordFragment : Fragment(), View.OnClickListener {
                 Log.d("Tag", "Record list Clicked")
             }
         }
+    }
+
+    private fun checkPermissions(): Boolean {
+        return if (context?.let { ActivityCompat.checkSelfPermission(it, recordPermission) } == PackageManager.PERMISSION_GRANTED){
+            true
+        }else{
+            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(recordPermission), PERMISSION_CODE) }
+            false
+        }
+
     }
 }
