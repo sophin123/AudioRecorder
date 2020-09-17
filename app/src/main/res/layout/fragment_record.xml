@@ -49,19 +49,22 @@
         android:layout_marginTop="84dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/record_timer"
-        app:layout_constraintVertical_bias="0.026"
+        app:layout_constraintVertical_bias="0.015"
         app:srcCompat="@drawable/mic_enabled" />
 
     <ImageView
+        android:id="@+id/view_record_list"
         android:layout_width="83dp"
         android:layout_height="83dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/record_list" />
 
 
