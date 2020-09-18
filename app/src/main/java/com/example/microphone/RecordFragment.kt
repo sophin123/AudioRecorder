@@ -29,7 +29,7 @@ class RecordFragment : Fragment(), View.OnClickListener {
     lateinit var navController: NavController
     lateinit var viewList: ImageButton
     lateinit var recordBtn: ImageButton
-    lateinit var text: TextView
+    lateinit var filename: TextView
 
     private var isRecording: Boolean = false
 
@@ -62,6 +62,7 @@ class RecordFragment : Fragment(), View.OnClickListener {
         viewList = view.findViewById(R.id.view_record_list)
         recordBtn = view.findViewById(R.id.record_audio)
         timer = view.findViewById(R.id.record_timer)
+        filename = view.findViewById(R.id.record_filename)
 
 
 
@@ -109,6 +110,7 @@ class RecordFragment : Fragment(), View.OnClickListener {
 
 
         recordFile = "filename + ${formatter.format(now)}.3gp"
+        filename.setText("Recording File + $recordFile")
 
         mediaRecorder = MediaRecorder()
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -131,6 +133,7 @@ class RecordFragment : Fragment(), View.OnClickListener {
         mediaRecorder.reset()
         mediaRecorder.release()
         timer.stop()
+        filename.setText("Recording Stopped + $recordFile")
     }
 
     private fun checkPermissions(): Boolean {
