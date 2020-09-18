@@ -5,10 +5,12 @@ import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +41,9 @@ class RecordFragment : Fragment(), View.OnClickListener {
     lateinit var mediaRecorder: MediaRecorder
     lateinit var recordFile: String
 
+    //Chronometer
+    lateinit var timer: Chronometer
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,10 +61,13 @@ class RecordFragment : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
         viewList = view.findViewById(R.id.view_record_list)
         recordBtn = view.findViewById(R.id.record_audio)
-        text = view.findViewById(R.id.record_filename)
+        timer = view.findViewById(R.id.record_timer)
+
+
 
         viewList.setOnClickListener(this)
         recordBtn.setOnClickListener(this)
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -111,6 +119,9 @@ class RecordFragment : Fragment(), View.OnClickListener {
         mediaRecorder.prepare()
         mediaRecorder.start()
 
+        timer.base = SystemClock.elapsedRealtime()
+        timer.start()
+
         Toast.makeText(context, "Record Starting", Toast.LENGTH_SHORT).show()
 
     }
@@ -119,6 +130,7 @@ class RecordFragment : Fragment(), View.OnClickListener {
         mediaRecorder.stop()
         mediaRecorder.reset()
         mediaRecorder.release()
+        timer.stop()
     }
 
     private fun checkPermissions(): Boolean {
